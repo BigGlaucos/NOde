@@ -1,0 +1,21 @@
+projetar um fluxo de interação entre cliente e servidor usando requisições HTTP para cirar um (1) dois (2) aplicativo web simples. 
+Descreva o papel de cada método HTTP no fluxo do aplciatio e como as respostas HTTP seriam estruturadas.
+
+1 - um formulairo de cadastro.
+
+1º Criação do ambiente do aplicativo (Servidor de funcionamento) atraves dos metodos require HTTP para importação da biblioteca e PORT para criação da porta de hospedagem. 
+2º Fornecimento de dados do usuario para a aplicação, que sera requisitado pelo metodo GET.
+3º Atualização de informações no servidor remoto atraves do metodo POST,ou seja armazenametno dos dados fornecidos.
+4º O servidor verifica os dados do formulário e, se forem válidos, cria uma nova conta de usuário.
+5º O servidor retorna uma resposta HTTP 201 Created ao cliente.
+6º O cliente é redirecionado para a página de login.
+
+2 - sistema de votação.
+
+1º Criação do ambiente do aplicativo (Servidor de funcionamento) atraves dos metodos require HTTP para importação da biblioteca e PORT para criação da porta de hospedagem. 
+2º O cliente envia uma requisição HTTP GET para a página de votação.
+3º O servidor retorna a página de votação ao cliente.
+4º O cliente seleciona uma opção de votação e envia uma requisição HTTP POST para o servidor.
+5º O servidor registra o voto do cliente com put.
+6º O servidor retorna uma resposta HTTP 200 OK ao cliente.
+7º O cliente é redirecionado para a página de resultados da votação.
