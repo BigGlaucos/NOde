@@ -1,24 +1,27 @@
-const { response } = require("express");
 const express = require ("express");
 const {randomUUID} = require ("crypto");
 const app = express();
-app.get("/", (req,res) =>{
-    return res.send("Criando minha primeira rota usando o framework express");
-});
+
+app.use(express.json() );
 
  const produtos = [];
 app.post("/produtos",(req,res)=>{
 
- const {name, price, description} = request.body
-   
+ const {name, price, description} = req.body
+ 
  const produto = {
-    id:randomUUID(),
-    name,
-    price,
-    description
-   }
+     id:randomUUID(),
+     name: name,
+     price: price ,
+     description : description
+    }
+    
+    produtos.push(produto);
+
+   return res.status(201).json(produtos);
+
 });
-app.listen(3001,() => console.log(`Servidor rodando na porta 3001`));
+app.listen(5000,() => console.log(`Servidor rodando na porta 5000`));
 
 
 
