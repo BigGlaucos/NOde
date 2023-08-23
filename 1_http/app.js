@@ -57,9 +57,9 @@ app.put("/produtos/:id", (req, res) => {
         ...produtos[produtoIndex],  
         name,
         price,
-        description,
+        description
     };
-
+    return res.json({message:"Produto Atualizado"});
 })
 
 app.listen(PORT, () => console.log(`Servidor rodando na porta 5000`));
