@@ -1,7 +1,9 @@
 const express = require("express");
 const { randomUUID } = require("crypto");
 const { response } = require("express");
+const { request } = require("http");
 const app = express();
+PORT = 5000;
 
 app.use(express.json());
 
@@ -23,26 +25,41 @@ app.post("/produtos", (req, res) => {
 
 app.get("/produtos", (req, res) => {
     return res.json(produtos);
-}); 
+});
 
-app.get("/produtos/:id",(req,res)=>{
+app.get("/produtos/:id", (req, res) => {
     const { id } = req.params
 
-    const produto = produtos.find((produto)=> produto.id === id);
+    const produto = produtos.find((produto) => produto.id === id);
 
-     return res.json(produto);
+    return res.json(produto);
 });
 
 app.delete("/produtos/:id", (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const produto = produtos.findIndex((produto) => produto.id === id);
+    const produto = produtos.findIndex((produto) => produto.id === id);
 
-  produtos.splice(produto,1);
+    produtos.splice(produto, 1);
 
-  return res.json(produto);
-   
+    return res.json(produto);
+
 
 });
 
-app.listen(5000, () => console.log(`Servidor rodando na porta 5000`));
+app.put("/produtos/:id", (req, res) => {
+    const { id } = req.params;
+    const { name, price, description } = req.body;
+
+    const produtoIndex = produtos.findIndex((produto) => produto.id === id)
+
+    produtos[produtoIndex] = {
+        ...produtos[produtoIndex],  
+        name,
+        price,
+        description,
+    };
+
+})
+
+app.listen(PORT, () => console.log(`Servidor rodando na porta 5000`));
