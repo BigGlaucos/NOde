@@ -88,6 +88,18 @@ app.get("users/:userID/posts", (req,res) => {
     return res.status(200).json(posts)
 });
 
+app.delete("/users/id", (req,res)=>{
+    const { id } = req.params;
 
+    const index = users.findIndex((u) => u.id === id );
+
+    if (index ===-1){
+                 return res.status(404).json({ error: "MISSING" });
+    }
+
+    user.splice(index,1);
+
+    return res.status(200).json({message:"User Deleted 🟢 "})
+});
 
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
