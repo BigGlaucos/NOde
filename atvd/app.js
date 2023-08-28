@@ -1,7 +1,7 @@
 const express = require("express");
 const { randomUUID } = require("crypto");
 const users = [];
-const posts = []
+const posts = [];
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.post("/users", (req, res) => {
         name,
         email,
         password,
-        posts: []
+        posts: [],
     };
 
     users.push(user);
@@ -32,17 +32,17 @@ app.put("/users/:id", (req, res) => {
     const user = users.find((u) => u.id === id);
 
     if (!user) {
-        return res.status(404).json({ error: "MISSING" })
+        return res.status(404).json({ error: "MISSING" });
     }
     user.name = name;
     user.email = email;
     user.password = password;
 
-    return res.status(200).json(user)
+    return res.status(200).json(user);
 });
 
 app.get("/users", (req, res) => {
-    return res.status(200).users
+    return res.status(200).users;
 });
 
 app.get("/posts", (req, res) => {
@@ -56,11 +56,11 @@ app.post("/posts", (req, res) => {
         id: UUID(),
         title: title,
         content: content,
-        authorId: authorId
-    }
+        authorId: authorId,
+    };
     posts.push(post);
 
-    return res.status(200).json(post)
+    return res.status(200).json(post);
 });
 
 app.put("/posts/:id", (req, res) => {
@@ -80,12 +80,11 @@ app.put("/posts/:id", (req, res) => {
 });
 
 app.get("users/:userID/posts", (req, res) => {
-
     const { userID } = req.params;
 
     const posts = posts.filter((p) => p.authorId === userID);
 
-    return res.status(200).json(posts)
+    return res.status(200).json(posts);
 });
 
 app.delete("/users/:id", (req, res) => {
@@ -99,7 +98,7 @@ app.delete("/users/:id", (req, res) => {
 
     user.splice(index, 1);
 
-    return res.status(200).json({ message: "User Deleted 🟢 " })
+    return res.status(200).json({ message: "User Deleted 🟢 " });
 });
 
 app.delete("/post/:id", (req, res) => {
