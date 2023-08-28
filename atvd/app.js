@@ -10,111 +10,110 @@ PORT = 5000;
 app.use(express.json());
 
 app.post("/users", (req, res) => {
-  const { name, post, like } = req.body;
+    const { name, post, like } = req.body;
 
-  const user = {
-    id: randomUUID(),
+    const user = {
+        id: randomUUID(),
         name,
         email,
         password,
         posts: []
-  };
+    };
 
-  users.push(user);
+    users.push(user);
 
-  return res.status(201).json(user);
+    return res.status(201).json(user);
 });
 
-app.put("/users/:id", (req,res)=>{
-    const {id} = req.params;
-    const {name,email,password} = req.body;
+app.put("/users/:id", (req, res) => {
+    const { id } = req.params;
+    const { name, email, password } = req.body;
 
-    const user = users.find((u) => u.id ===id);
+    const user = users.find((u) => u.id === id);
 
-    if (!user){
-        return res.status(404).json({error:"MISSING"})
+    if (!user) {
+        return res.status(404).json({ error: "MISSING" })
     }
-user.name = name;
-user.email = email;
-user.password = password;
+    user.name = name;
+    user.email = email;
+    user.password = password;
 
-return res.status(200).json(user)
+    return res.status(200).json(user)
 });
 
-app.get("/users", (req,res)=> {
+app.get("/users", (req, res) => {
     return res.status(200).users
 });
 
 app.get("/posts", (req, res) => {
-  return res.status(200).posts;
+    return res.status(200).posts;
 });
 
-app.post("/posts",(req,res)=>{
-     const { title, content, authorId } = req.body;
+app.post("/posts", (req, res) => {
+    const { title, content, authorId } = req.body;
 
-     const post ={
-        id:UUID(),
-        title:title,
-        content:content,
-        authorId:authorId
-     }
+    const post = {
+        id: UUID(),
+        title: title,
+        content: content,
+        authorId: authorId
+    }
     posts.push(post);
 
     return res.status(200).json(post)
 });
 
-app.put("/posts/:id", (req,res)=>{
+app.put("/posts/:id", (req, res) => {
     const { id } = req.params;
-    const { Title,Content} = req.body;
+    const { Title, Content } = req.body;
 
     const post = posts.find((p) => p.id === id);
 
-    if(!post){
-         return res.status(404).json({ error: "MISSING" });
+    if (!post) {
+        return res.status(404).json({ error: "MISSING" });
     }
-    
+
     post.title = title;
     post.content = content;
-    
+
     return res.status(200).json(post);
 });
 
-app.get("users/:userID/posts", (req,res) => {
+app.get("users/:userID/posts", (req, res) => {
 
-    const {userID} = req.params;
+    const { userID } = req.params;
 
     const posts = posts.filter((p) => p.authorId === userID);
 
     return res.status(200).json(posts)
 });
 
-app.delete("/users/:id", (req,res)=>{
+app.delete("/users/:id", (req, res) => {
     const { id } = req.params;
 
-    const index = users.findIndex((u) => u.id === id );
+    const index = users.findIndex((u) => u.id === id);
 
-    if (index ===-1){
-                 return res.status(404).json({ error: "MISSING" });
+    if (index === -1) {
+        return res.status(404).json({ error: "MISSING" });
     }
 
-    user.splice(index,1);
+    user.splice(index, 1);
 
-    return res.status(200).json({message:"User Deleted 🟢 "})
+    return res.status(200).json({ message: "User Deleted 🟢 " })
 });
 
 app.delete("/post/:id", (req, res) => {
-  const { id } = req.params;
+    const { id } = req.params;
 
-  const index = posts.findIndex((p) => p.id === id);
+    const index = posts.findIndex((p) => p.id === id);
 
-  if (index === -1) {
-    return res.status(404).json({ error: "MISSING" });
-  }
+    if (index === -1) {
+        return res.status(404).json({ error: "MISSING" });
+    }
 
-  posts.splice(index, 1);
+    posts.splice(index, 1);
 
-  return res.status(200).json({ message: "Post Deleted 🟢 " });
+    return res.status(200).json({ message: "Post Deleted 🟢 " });
 });
-
 
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
