@@ -61,6 +61,24 @@ app.post("/posts",(req,res)=>{
     posts.push(post);
 
     return res.status(200).json(post)
-})
+});
+
+app.put("/posts/:id", (req,res)=>{
+    const { id } = req.params;
+    const { Title,Content} = req.body;
+
+    const post = posts.find((p) => p.id === id);
+
+    if(!post){
+         return res.status(404).json({ error: "MISSING" });
+    }
+    
+    post.title = title;
+    post.content = content;
+    
+    return res.status(200).json(post);
+});
+
+
 
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
