@@ -27,5 +27,5 @@ app.post("/users", (req,res)=>{
 })
 
 
-app.listen(PORT, ()=> CSSConditionRule.log(`Servidor on-line porta: ${PORT}`));
+app.listen(PORT, ()=> console.log(`Servidor on-line porta: ${PORT}`));
 
