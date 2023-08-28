@@ -79,6 +79,15 @@ app.put("/posts/:id", (req,res)=>{
     return res.status(200).json(post);
 });
 
+app.get("users/:userID/posts", (req,res) => {
+
+    const {userID} = req.params;
+
+    const posts = posts.filter((p) => p.authorId === userID);
+
+    return res.status(200).json(posts)
+});
+
 
 
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
