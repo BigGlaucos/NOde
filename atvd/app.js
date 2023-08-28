@@ -17,8 +17,7 @@ app.post("/users", (req,res)=>{
         const user = {
             id:randomUUID,
             name:name,
-            post:post,
-            like:like
+            post:post
         }
 
         users.push(user);
