@@ -88,7 +88,7 @@ app.get("users/:userID/posts", (req,res) => {
     return res.status(200).json(posts)
 });
 
-app.delete("/users/id", (req,res)=>{
+app.delete("/users/:id", (req,res)=>{
     const { id } = req.params;
 
     const index = users.findIndex((u) => u.id === id );
@@ -101,5 +101,20 @@ app.delete("/users/id", (req,res)=>{
 
     return res.status(200).json({message:"User Deleted 🟢 "})
 });
+
+app.delete("/post/:id", (req, res) => {
+  const { id } = req.params;
+
+  const index = posts.findIndex((p) => p.id === id);
+
+  if (index === -1) {
+    return res.status(404).json({ error: "MISSING" });
+  }
+
+  posts.splice(index, 1);
+
+  return res.status(200).json({ message: "Post Deleted 🟢 " });
+});
+
 
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
