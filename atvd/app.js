@@ -26,6 +26,9 @@ app.post("/users", (req,res)=>{
         return res.status(201).json(users);
 })
 
+app.get("/users" , (req,res)=>{
+    return res.json(users);
+})
 
 app.listen(PORT, ()=> console.log(`Servidor on-line porta: ${PORT}`));
 
