@@ -12,12 +12,12 @@ app.use(express.json());
 const users = [];
 
 app.post("/users", (req,res)=>{
-     const {name,post,like} = req.body
+     const {name,publi,} = req.body
 
         const user = {
             id:randomUUID,
             name:name,
-            post:post
+            publi:publi
         }
 
         users.push(user);
@@ -28,6 +28,16 @@ app.post("/users", (req,res)=>{
 app.get("/users" , (req,res)=>{
     return res.json(users);
 })
+
+
+app.get("/users/:publi", (req, res) => {
+  const { id } = req.params;
+
+  const post = users.find((user) => user.id === id);
+
+  return res.json(publi);
+});
+
 
 app.listen(PORT, ()=> console.log(`Servidor on-line porta: ${PORT}`));
 
