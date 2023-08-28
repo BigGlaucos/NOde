@@ -13,7 +13,7 @@ app.post("/users", (req, res) => {
     const { name, post, like } = req.body;
 
     const user = {
-        id: randomUUID(),
+        id: UUID(),
         name,
         email,
         password,
