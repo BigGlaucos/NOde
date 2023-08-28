@@ -41,4 +41,26 @@ user.password = password;
 return res.status(200).json(user)
 });
 
+app.get("/users", (req,res)=> {
+    return res.status(200).users
+});
+
+app.get("/posts", (req, res) => {
+  return res.status(200).posts;
+});
+
+app.post("/posts",(req,res)=>{
+     const { title, content, authorId } = req.body;
+
+     const post ={
+        id:UUID(),
+        title:title,
+        content:content,
+        authorId:authorId
+     }
+    posts.push(post);
+
+    return res.status(200).json(post)
+})
+
 app.listen(PORT, () => console.log(`Servidor on-line porta: ${PORT}`));
